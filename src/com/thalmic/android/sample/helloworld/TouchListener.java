@@ -21,6 +21,7 @@ public class TouchListener implements OnTouchListener {
 	}
 	int placToCoordsX(float x)
 	{
+		
 		return 0; //TODO
 	}
 	int placToCoordsY(float y)
@@ -45,7 +46,7 @@ public class TouchListener implements OnTouchListener {
 		        	coordinate[0] = placToCoordsX(e.getX());
 		        	coordinate[1] = placToCoordsY(e.getY());
 		        	fingers.add(coordinate.clone());
-		        	prevIDs.add(e.getPointerId(ID));
+		        	prevIDs.add(ID);
 		        break;
 		        case MotionEvent.ACTION_POINTER_DOWN:
 		        	ID = e.getPointerId(e.getActionIndex());
