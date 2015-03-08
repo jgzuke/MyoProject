@@ -11,6 +11,11 @@ public class TouchListener implements OnTouchListener {
 	private int actionMask;
 	private ArrayList<Integer> prevIDs = new ArrayList<Integer>();
 	private int [] screenDimensions = new int[2];
+	
+	static int[] baseKeys = {0,5,10,15,19,24};
+	static int[] stringLocations = {54,235,411,577,745,925};
+	static int[] fretLocations = {408,740,1060,1350,2000};
+	int[] activeNodes = {0,0,0,0,0,0};
 	public TouchListener(){
 		Log.e("myid", "createdThing");
 	}
@@ -21,23 +26,18 @@ public class TouchListener implements OnTouchListener {
 	}
 	int placToCoordsX(float x)
 	{
-		
-		return 0; //TODO
+		return (int)x; //TODO
 	}
 	int placToCoordsY(float y)
 	{
-		return 0; //TODO
+		return (int)y; //TODO
 	}
 	int[] coordinate = new int[2];
 	int ID;
 	@Override
     public boolean onTouch(View v, MotionEvent e)
 	{
-		Log.e("myid", "created");
-		for(int i = 0; i < fingers.size(); i++)
-		{
-			Log.e("myid", "C: ".concat(Integer.toString(coordinate[0])).concat(", ").concat(Integer.toString(coordinate[1])) );
-		}
+		//Log.e("myid", "created");
 			actionMask = e.getActionMasked();
 		    switch (actionMask)
 		    {
@@ -50,8 +50,8 @@ public class TouchListener implements OnTouchListener {
 		        break;
 		        case MotionEvent.ACTION_POINTER_DOWN:
 		        	ID = e.getPointerId(e.getActionIndex());
-		        	coordinate[0] = placToCoordsX(e.getX());
-		        	coordinate[1] = placToCoordsY(e.getY());
+		        	coordinate[0] = placToCoordsX(e.getX(ID));
+		        	coordinate[1] = placToCoordsY(e.getY(ID));
 		        	fingers.add(coordinate.clone());
 		        	prevIDs.add(ID);
 		        break;
@@ -60,7 +60,7 @@ public class TouchListener implements OnTouchListener {
 		        	{
 		        		coordinate[0] = placToCoordsX(e.getX(e.findPointerIndex(prevIDs.get(i))));
 		        		coordinate[1] = placToCoordsY(e.getY(e.findPointerIndex(prevIDs.get(i))));
-		        		fingers.set(i, coordinate);
+		        		fingers.set(i, coordinate.clone());
 		        	}
 		        break;
 		        case MotionEvent.ACTION_UP:
@@ -78,6 +78,45 @@ public class TouchListener implements OnTouchListener {
 		        	}
 		        break;
 		    }
+		int[] newNodes = {0,0,0,0,0,0};
+		for(int i = 0; i < fingers.size(); i++)
+		{
+			if(actionMask != MotionEvent.ACTION_MOVE) Log.e("myid", "C: ".concat(Integer.toString(fingers.get(i)[0])).concat(", ").concat(Integer.toString(fingers.get(i)[1])) );
+			int x = fingers.get(i)[0] - 62;
+	    	int y = fingers.get(i)[1];
+	    	int ax = 0;
+	    	int ay = 100;
+			int screenx = 1630-62;
+			int screeny = 978;
+			for(int j = 0; j<5; j++)
+			{
+				if(x<fretLocations[j])
+				{
+					ax = j;
+					break;
+				}
+			}			
+			ax = 5-ax;
+			for(int j = 0; j<6; j++)
+			{
+				if(Math.abs(y-stringLocations[j]) < 75)
+				{
+					ay = j;
+					break;
+				}
+			}
+			if(ay>6)
+				continue;
+			if(newNodes[ay] == 0)
+			{
+				newNodes[ay] = ax;
+			}
+		}
+		activeNodes = newNodes;
+		for(int i = 0; i<6; i++)
+		{
+			if(actionMask != MotionEvent.ACTION_MOVE) Log.e("myid", Integer.toString(activeNodes[i]+baseKeys[i]) + " ");
+		}
 		return true;
     }
 }

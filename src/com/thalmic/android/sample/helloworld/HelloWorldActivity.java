@@ -172,6 +172,7 @@ public class HelloWorldActivity extends Activity {
         detect = new TouchListener();
         graphicsController = new GraphicsController(this);
 		graphicsController.setOnTouchListener(detect);
+		graphicsController.setTouch(detect);
 		setContentView(graphicsController);
 
 

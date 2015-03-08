@@ -11,6 +11,7 @@ public final class GraphicsController extends View
 	public BitmapFactory.Options opts;
 	public String packageName;
 	Bitmap back;
+	private TouchListener touch;
 	public GraphicsController(Context co)
 	{
 		super(co);
@@ -21,12 +22,29 @@ public final class GraphicsController extends View
 		opts.inTempStorage = new byte[16 * 1024];
 		packageName = co.getPackageName();
 		res = co.getResources();
-		back = loadImage("guitar_frets", 800, 500);
+		back = loadImage("guitar_frets", 1920, 1080);
+	}
+	public void setTouch(TouchListener t)
+	{
+		touch = t;
 	}
 	@Override
 	protected void onDraw(Canvas g)
 	{
         g.drawBitmap(back, 0, 0, null);
+        for(int i = 0; i < 6; i++)
+        {
+            if(touch.activeNodes[i] != 0)
+            {
+                int l = 0;
+                if(5-touch.activeNodes[i]!=0)
+                {
+                    l = touch.fretLocations[5-1-touch.activeNodes[i]];
+                }
+                g.drawLine(l,touch.stringLocations[i],touch.fretLocations[5-touch.activeNodes[i]],touch.stringLocations[i], null);
+            }
+        }
+
 		//g.scale((float) screenDimensionMultiplier, (float) screenDimensionMultiplier);
 	}
 	public Bitmap loadImage(String imageName, int width, int height)
