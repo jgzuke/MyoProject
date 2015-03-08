@@ -13,8 +13,8 @@ public class TouchListener implements OnTouchListener {
 	private int [] screenDimensions = new int[2];
 	
 	static int[] baseKeys = {0,5,10,15,19,24};
-	static int[] stringLocations = {54,235,411,577,745,925};
-	static int[] fretLocations = {408,740,1060,1350,2000};
+	static int[] stringLocations = {155,310,465,620,775,930};
+	static int[] fretLocations = {408,790,1230,1640,2000};
 	int[] activeNodes = {0,0,0,0,0,0};
 	public TouchListener(){
 		Log.e("myid", "createdThing");
@@ -125,4 +125,14 @@ public class TouchListener implements OnTouchListener {
 		}
 		return true;
     }
+	
+	public int[] getKeys()
+	{
+		int[] toplay = new int[6];
+		for(int i = 0; i<6; i++)
+		{
+			toplay[i] = activeNodes[i] + baseKeys[i];
+		}
+		return toplay;
+	}
 }

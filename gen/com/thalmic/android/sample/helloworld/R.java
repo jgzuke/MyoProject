@@ -11,22 +11,22 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int myosdk__button_orange=0x7f040003;
-        public static final int myosdk__button_red=0x7f040002;
-        public static final int myosdk__indicator_green=0x7f040001;
-        public static final int myosdk__thalmic_blue=0x7f040000;
+        public static final int myosdk__button_orange=0x7f050003;
+        public static final int myosdk__button_red=0x7f050002;
+        public static final int myosdk__indicator_green=0x7f050001;
+        public static final int myosdk__thalmic_blue=0x7f050000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
          */
-        public static final int activity_horizontal_margin=0x7f050004;
-        public static final int activity_vertical_margin=0x7f050005;
+        public static final int activity_horizontal_margin=0x7f060004;
+        public static final int activity_vertical_margin=0x7f060005;
         /**  Default screen margins, per the Android Design guidelines. 
          */
-        public static final int myosdk__activity_horizontal_margin=0x7f050000;
-        public static final int myosdk__activity_vertical_margin=0x7f050001;
-        public static final int myosdk__fragment_scan_window_height=0x7f050003;
-        public static final int myosdk__fragment_scan_window_width=0x7f050002;
+        public static final int myosdk__activity_horizontal_margin=0x7f060000;
+        public static final int myosdk__activity_vertical_margin=0x7f060001;
+        public static final int myosdk__fragment_scan_window_height=0x7f060003;
+        public static final int myosdk__fragment_scan_window_width=0x7f060002;
     }
     public static final class drawable {
         public static final int guitar_frets=0x7f020000;
@@ -35,15 +35,15 @@ public final class R {
         public static final int myosdk__firmware_incompatible_dot=0x7f020003;
     }
     public static final class id {
-        public static final int action_scan=0x7f090007;
-        public static final int imageView1=0x7f090001;
-        public static final int myView=0x7f090000;
-        public static final int myosdk__action_scan=0x7f090008;
-        public static final int myosdk__connection_state_dot=0x7f090005;
-        public static final int myosdk__fragment_scan=0x7f090002;
-        public static final int myosdk__progress=0x7f090004;
-        public static final int myosdk__required_firmware_version_text=0x7f090003;
-        public static final int myosdk__scan_result_view=0x7f090006;
+        public static final int action_scan=0x7f0a0007;
+        public static final int imageView1=0x7f0a0001;
+        public static final int myView=0x7f0a0000;
+        public static final int myosdk__action_scan=0x7f0a0008;
+        public static final int myosdk__connection_state_dot=0x7f0a0005;
+        public static final int myosdk__fragment_scan=0x7f0a0002;
+        public static final int myosdk__progress=0x7f0a0004;
+        public static final int myosdk__required_firmware_version_text=0x7f0a0003;
+        public static final int myosdk__scan_result_view=0x7f0a0006;
     }
     public static final class layout {
         public static final int activity_hello_world=0x7f030000;
@@ -52,28 +52,60 @@ public final class R {
         public static final int myosdk__fragment_scan=0x7f030003;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
-        public static final int myosdk__fragment_scan=0x7f080001;
+        public static final int main=0x7f090000;
+        public static final int myosdk__fragment_scan=0x7f090001;
+    }
+    public static final class raw {
+        public static final int a=0x7f040000;
+        public static final int a2=0x7f040001;
+        public static final int a3=0x7f040002;
+        public static final int as=0x7f040003;
+        public static final int as2=0x7f040004;
+        public static final int b=0x7f040005;
+        public static final int b2=0x7f040006;
+        public static final int c=0x7f040007;
+        public static final int c2=0x7f040008;
+        public static final int cs=0x7f040009;
+        public static final int cs2=0x7f04000a;
+        public static final int d=0x7f04000b;
+        public static final int d2=0x7f04000c;
+        public static final int ds=0x7f04000d;
+        public static final int ds2=0x7f04000e;
+        public static final int e=0x7f04000f;
+        public static final int e2=0x7f040010;
+        public static final int e3=0x7f040011;
+        public static final int f=0x7f040012;
+        public static final int f2=0x7f040013;
+        public static final int f3=0x7f040014;
+        public static final int fs=0x7f040015;
+        public static final int fs2=0x7f040016;
+        public static final int fs3=0x7f040017;
+        public static final int g=0x7f040018;
+        public static final int g2=0x7f040019;
+        public static final int g3=0x7f04001a;
+        public static final int gs=0x7f04001b;
+        public static final int gs2=0x7f04001c;
+        public static final int gs3=0x7f04001d;
     }
     public static final class string {
-        public static final int app_name=0x7f060006;
-        public static final int arm_left=0x7f06000e;
-        public static final int arm_right=0x7f06000f;
-        public static final int hello_world=0x7f060007;
-        public static final int locked=0x7f060011;
-        public static final int myosdk__action_scan=0x7f060001;
-        public static final int myosdk__action_stop_scan=0x7f060002;
-        public static final int myosdk__firmware_required_format=0x7f060005;
-        public static final int myosdk__firmware_version_format=0x7f060004;
-        public static final int myosdk__title_activity_scan=0x7f060000;
-        public static final int myosdk__unknown_myo=0x7f060003;
-        public static final int pose_fingersspread=0x7f06000c;
-        public static final int pose_fist=0x7f060009;
-        public static final int pose_rest=0x7f06000d;
-        public static final int pose_wavein=0x7f06000a;
-        public static final int pose_waveout=0x7f06000b;
-        public static final int scan=0x7f060008;
-        public static final int unlocked=0x7f060010;
+        public static final int app_name=0x7f070006;
+        public static final int arm_left=0x7f07000e;
+        public static final int arm_right=0x7f07000f;
+        public static final int hello_world=0x7f070007;
+        public static final int locked=0x7f070011;
+        public static final int myosdk__action_scan=0x7f070001;
+        public static final int myosdk__action_stop_scan=0x7f070002;
+        public static final int myosdk__firmware_required_format=0x7f070005;
+        public static final int myosdk__firmware_version_format=0x7f070004;
+        public static final int myosdk__title_activity_scan=0x7f070000;
+        public static final int myosdk__unknown_myo=0x7f070003;
+        public static final int pose_fingersspread=0x7f07000c;
+        public static final int pose_fist=0x7f070009;
+        public static final int pose_rest=0x7f07000d;
+        public static final int pose_wavein=0x7f07000a;
+        public static final int pose_waveout=0x7f07000b;
+        public static final int scan=0x7f070008;
+        public static final int unlocked=0x7f070010;
     }
     public static final class style {
         /** 
@@ -86,12 +118,12 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f070002;
+        public static final int AppBaseTheme=0x7f080002;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070003;
-        public static final int myosdk__PopupActivityTheme=0x7f070000;
-        public static final int myosdk__ScanActivityTheme=0x7f070001;
+        public static final int AppTheme=0x7f080003;
+        public static final int myosdk__PopupActivityTheme=0x7f080000;
+        public static final int myosdk__ScanActivityTheme=0x7f080001;
     }
 }

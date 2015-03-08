@@ -9,11 +9,17 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -82,15 +88,21 @@ public class HelloWorldActivity extends Activity {
         }
         public void checkStrumming(float pitch)
         {
+        	int[] toplay = detect.getKeys();
         	pastValues.add(pitch);
         	if(pastValues.size() > 20) pastValues.remove(0);
         	if(isStrumming())
         	{
         		strumCount ++;
+        		for(int i = 0; i < 6; i++)
+        			playNote(toplay[i]);
         		pastValues.clear();
         		pastValues.add(pitch);
         		Log.e("myid", "Strum");
         		Log.e("myid", Integer.toString(strumCount));
+        		
+        		
+        		
         		//TODO working here right now
         	}
         }
@@ -173,6 +185,7 @@ public class HelloWorldActivity extends Activity {
         graphicsController = new GraphicsController(this, detect);
 		graphicsController.setOnTouchListener(detect);
 		setContentView(graphicsController);
+		setWindowAndAudio();
 
 
         // First, we initialize the Hub singleton with an application identifier.
@@ -187,7 +200,56 @@ public class HelloWorldActivity extends Activity {
         // Next, register for DeviceListener callbacks.
         hub.addListener(mListener);
     }
-
+	protected MediaPlayer backMusic;
+	private SoundPool spool;
+	private int[] soundPoolMap = new int[12];
+	protected AudioManager audioManager;
+	protected void setWindowAndAudio()
+	{
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		spool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+		audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		/*
+		for (int i = 0; i < 12; i++) {
+			soundPoolMap[i] = spool.load("res/raw/" + i + ".mp3", 1);
+		}*/
+		soundPoolMap[0] = spool.load(this, R.raw.e, 1);
+		soundPoolMap[1] = spool.load(this, R.raw.f, 1);
+		soundPoolMap[2] = spool.load(this, R.raw.fs, 1);
+		soundPoolMap[3] = spool.load(this, R.raw.g, 1);
+		soundPoolMap[4] = spool.load(this, R.raw.gs, 1);
+		soundPoolMap[5] = spool.load(this, R.raw.a, 1);
+		soundPoolMap[6] = spool.load(this, R.raw.as, 1);
+		soundPoolMap[7] = spool.load(this, R.raw.b, 1);
+		soundPoolMap[8] = spool.load(this, R.raw.c, 1);
+		soundPoolMap[9] = spool.load(this, R.raw.cs, 1);
+		soundPoolMap[10] = spool.load(this, R.raw.d, 1);
+		soundPoolMap[11] = spool.load(this, R.raw.ds, 1);
+		/*
+		soundPoolMap[12] = spool.load(this, R.raw.e2, 1);
+		soundPoolMap[13] = spool.load(this, R.raw.f2, 1);
+		soundPoolMap[14] = spool.load(this, R.raw.fs2, 1);
+		soundPoolMap[15] = spool.load(this, R.raw.g2, 1);
+		soundPoolMap[16] = spool.load(this, R.raw.gs2, 1);
+		soundPoolMap[17] = spool.load(this, R.raw.a2, 1);
+		soundPoolMap[18] = spool.load(this, R.raw.as2, 1);
+		soundPoolMap[19] = spool.load(this, R.raw.b2, 1);
+		soundPoolMap[20] = spool.load(this, R.raw.c2, 1);
+		soundPoolMap[21] = spool.load(this, R.raw.cs2, 1);
+		soundPoolMap[22] = spool.load(this, R.raw.d2, 1);
+		soundPoolMap[23] = spool.load(this, R.raw.ds2, 1);
+		soundPoolMap[24] = spool.load(this, R.raw.e3, 1);
+		soundPoolMap[25] = spool.load(this, R.raw.f3, 1);
+		soundPoolMap[26] = spool.load(this, R.raw.fs3, 1);
+		soundPoolMap[27] = spool.load(this, R.raw.g3, 1);
+		soundPoolMap[28] = spool.load(this, R.raw.gs3, 1);
+		soundPoolMap[29] = spool.load(this, R.raw.a3, 1);*/
+	}
+    protected void playNote(int toPlay)
+	{
+		float newV = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		spool.play(soundPoolMap[toPlay%12], newV, newV, 1, 0, (float)Math.pow(2, toPlay/12));
+	}
     @Override
     protected void onDestroy() {
         super.onDestroy();
