@@ -144,7 +144,7 @@ public class TouchListener implements OnTouchListener {
 				if ((toplay[i] - toplay[j]) == 4) {
 					for (int k = 0; k < 6; k++) {
 						if ((toplay[i] - toplay[k]) == 7) {
-							int [] newI = {i, j, k, -1, -1, -1};
+							int [] newI = {i, j, k, i+12, -1, -1};
 							return newI;
 						}
 						
@@ -160,7 +160,7 @@ public class TouchListener implements OnTouchListener {
 				if ((toplay[i]%12 - toplay[j]%12) == 3) {
 					for (int k = 0; k < 6; k++) {
 						if ((toplay[i] - toplay[k]) == 7) {
-							int [] newI = {i, j, k, -1, -1, -1};
+							int [] newI = {i, j, k, i+12, -1, -1};
 							return newI;
 						}
 						
