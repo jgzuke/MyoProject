@@ -9,13 +9,12 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.thalmic.myo.AbstractDeviceListener;
@@ -29,59 +28,36 @@ import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
 public class HelloWorldActivity extends Activity {
-
-    private TextView mLockStateView;
-    private TextView mTextView;
-    private TextView mTextCount;
+	protected TouchListener detect;
     private int strumCount = 0;
     private ArrayList<Float> pastValues = new ArrayList<Float>();
     private boolean hadUpstroke = true;
+    protected GraphicsController graphicsController;
 
-    // Classes that inherit from AbstractDeviceListener can be used to receive events from Myo devices.
-    // If you do not override an event, the default behavior is to do nothing.
     private DeviceListener mListener = new AbstractDeviceListener() {
-
-        // onConnect() is called whenever a Myo has been connected.
         @Override
         public void onConnect(Myo myo, long timestamp) {
-            // Set the text color of the text view to cyan when a Myo connects.
-            mTextView.setTextColor(Color.CYAN);
         }
-
-        // onDisconnect() is called whenever a Myo has been disconnected.
         @Override
         public void onDisconnect(Myo myo, long timestamp) {
-            // Set the text color of the text view to red when a Myo disconnects.
-            mTextView.setTextColor(Color.RED);
         }
 
-        // onArmSync() is called whenever Myo has recognized a Sync Gesture after someone has put it on their
-        // arm. This lets Myo know which arm it's on and which way it's facing.
         @Override
         public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection) {
-            mTextView.setText(myo.getArm() == Arm.LEFT ? R.string.arm_left : R.string.arm_right);
         }
 
-        // onArmUnsync() is called whenever Myo has detected that it was moved from a stable position on a person's arm after
-        // it recognized the arm. Typically this happens when someone takes Myo off of their arm, but it can also happen
-        // when Myo is moved around on the arm.
         @Override
         public void onArmUnsync(Myo myo, long timestamp) {
-            mTextView.setText(R.string.hello_world);
         }
 
-        // onUnlock() is called whenever a synced Myo has been unlocked. Under the standard locking
-        // policy, that means poses will now be delivered to the listener.
         @Override
         public void onUnlock(Myo myo, long timestamp) {
-            mLockStateView.setText(R.string.unlocked);
         }
 
         // onLock() is called whenever a synced Myo has been locked. Under the standard locking
         // policy, that means poses will no longer be delivered to the listener.
         @Override
         public void onLock(Myo myo, long timestamp) {
-            mLockStateView.setText(R.string.locked);
         }
         
         public boolean isStrumming()
@@ -90,13 +66,13 @@ public class HelloWorldActivity extends Activity {
         	float diff = pastValues.get(0) - pastValues.get(pastValues.size()-1);
         	if(!hadUpstroke)
     		{
-        		if (diff > 10)
+        		if (diff > 6)
             	{
         			hadUpstroke=true;
             	}
     		} else
     		{
-    			if (diff < -20)
+    			if (diff < -10)
             	{
             		hadUpstroke=false;
             		return true;
@@ -106,7 +82,6 @@ public class HelloWorldActivity extends Activity {
         }
         public void checkStrumming(float pitch)
         {
-        	mTextCount.setText(Float.toString(pitch));
         	pastValues.add(pitch);
         	if(pastValues.size() > 20) pastValues.remove(0);
         	if(isStrumming())
@@ -124,21 +99,18 @@ public class HelloWorldActivity extends Activity {
         // represented as a quaternion.
         @Override
         public void onOrientationData(Myo myo, long timestamp, Quaternion rotation) {
-            // Calculate Euler angles (roll, pitch, and yaw) from the quaternion.
             float roll = (float) Math.toDegrees(Quaternion.roll(rotation));
             float pitch = (float) Math.toDegrees(Quaternion.pitch(rotation));
             float yaw = (float) Math.toDegrees(Quaternion.yaw(rotation));
-
-            // Adjust roll and pitch for the orientation of the Myo on the arm.
             if (myo.getXDirection() == XDirection.TOWARD_ELBOW) {
                 roll *= -1;
                 pitch *= -1;
             }
 
             // Next, we apply a rotation to the text view using the roll, pitch, and yaw.
-            mTextView.setRotation(roll);
-            mTextView.setRotationX(pitch);
-            mTextView.setRotationY(yaw);
+            //mTextView.setRotation(roll);
+            //mTextView.setRotationX(pitch);
+            //mTextView.setRotationY(yaw);
             checkStrumming(pitch);
         }
 
@@ -149,7 +121,7 @@ public class HelloWorldActivity extends Activity {
             // based on the pose we receive.
             switch (pose) {
                 case UNKNOWN:
-                    mTextView.setText(getString(R.string.hello_world));
+                    //mTextView.setText(getString(R.string.hello_world));
                     break;
                 case REST:
                 case DOUBLE_TAP:
@@ -162,19 +134,19 @@ public class HelloWorldActivity extends Activity {
                             restTextId = R.string.arm_right;
                             break;
                     }
-                    mTextView.setText(getString(restTextId));
+                    //mTextView.setText(getString(restTextId));
                     break;
                 case FIST:
-                    mTextView.setText(getString(R.string.pose_fist));
+                    //mTextView.setText(getString(R.string.pose_fist));
                     break;
                 case WAVE_IN:
-                    mTextView.setText(getString(R.string.pose_wavein));
+                    //mTextView.setText(getString(R.string.pose_wavein));
                     break;
                 case WAVE_OUT:
-                    mTextView.setText(getString(R.string.pose_waveout));
+                    //mTextView.setText(getString(R.string.pose_waveout));
                     break;
                 case FINGERS_SPREAD:
-                    mTextView.setText(getString(R.string.pose_fingersspread));
+                    //mTextView.setText(getString(R.string.pose_fingersspread));
                     break;
             }
 
@@ -197,7 +169,10 @@ public class HelloWorldActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hello_world);
+        detect = new TouchListener();
+        graphicsController = new GraphicsController(this);
+		graphicsController.setOnTouchListener(detect);
+		setContentView(graphicsController);
 
 
         // First, we initialize the Hub singleton with an application identifier.
