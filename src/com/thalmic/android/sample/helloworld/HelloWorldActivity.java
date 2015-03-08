@@ -211,20 +211,20 @@ public class HelloWorldActivity extends Activity {
 		audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
 		/*
 		for (int i = 0; i < 12; i++) {
-			soundPoolMap[i] = spool.load("res/raw/" + i + ".mp3", 1);
+			soundPoolMap[i] = spool.load("res/raw/n" + i + ".mp3", 1);
 		}*/
-		soundPoolMap[0] = spool.load(this, R.raw.e, 1);
-		soundPoolMap[1] = spool.load(this, R.raw.f, 1);
-		soundPoolMap[2] = spool.load(this, R.raw.fs, 1);
-		soundPoolMap[3] = spool.load(this, R.raw.g, 1);
-		soundPoolMap[4] = spool.load(this, R.raw.gs, 1);
-		soundPoolMap[5] = spool.load(this, R.raw.a, 1);
-		soundPoolMap[6] = spool.load(this, R.raw.as, 1);
-		soundPoolMap[7] = spool.load(this, R.raw.b, 1);
-		soundPoolMap[8] = spool.load(this, R.raw.c, 1);
-		soundPoolMap[9] = spool.load(this, R.raw.cs, 1);
-		soundPoolMap[10] = spool.load(this, R.raw.d, 1);
-		soundPoolMap[11] = spool.load(this, R.raw.ds, 1);
+		soundPoolMap[0] = spool.load(this, R.raw.n0, 1);
+		soundPoolMap[1] = spool.load(this, R.raw.n1, 1);
+		soundPoolMap[2] = spool.load(this, R.raw.n2, 1);
+		soundPoolMap[3] = spool.load(this, R.raw.n3, 1);
+		soundPoolMap[4] = spool.load(this, R.raw.n4, 1);
+		soundPoolMap[5] = spool.load(this, R.raw.n5, 1);
+		soundPoolMap[6] = spool.load(this, R.raw.n6, 1);
+		soundPoolMap[7] = spool.load(this, R.raw.n7, 1);
+		soundPoolMap[8] = spool.load(this, R.raw.n8, 1);
+		soundPoolMap[9] = spool.load(this, R.raw.n9, 1);
+		soundPoolMap[10] = spool.load(this, R.raw.n10, 1);
+		soundPoolMap[11] = spool.load(this, R.raw.n11, 1);
 		/*
 		soundPoolMap[12] = spool.load(this, R.raw.e2, 1);
 		soundPoolMap[13] = spool.load(this, R.raw.f2, 1);
@@ -248,7 +248,9 @@ public class HelloWorldActivity extends Activity {
     protected void playNote(int toPlay)
 	{
 		float newV = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-		spool.play(soundPoolMap[toPlay%12], newV, newV, 1, 0, (float)Math.pow(2, toPlay/12));
+		if (toPlay != -1) {
+			spool.play(soundPoolMap[toPlay%12], newV, newV, 1, 0, (float)Math.pow(2, toPlay/12));
+		}
 	}
     @Override
     protected void onDestroy() {

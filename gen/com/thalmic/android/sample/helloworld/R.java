@@ -56,36 +56,18 @@ public final class R {
         public static final int myosdk__fragment_scan=0x7f090001;
     }
     public static final class raw {
-        public static final int a=0x7f040000;
-        public static final int a2=0x7f040001;
-        public static final int a3=0x7f040002;
-        public static final int as=0x7f040003;
-        public static final int as2=0x7f040004;
-        public static final int b=0x7f040005;
-        public static final int b2=0x7f040006;
-        public static final int c=0x7f040007;
-        public static final int c2=0x7f040008;
-        public static final int cs=0x7f040009;
-        public static final int cs2=0x7f04000a;
-        public static final int d=0x7f04000b;
-        public static final int d2=0x7f04000c;
-        public static final int ds=0x7f04000d;
-        public static final int ds2=0x7f04000e;
-        public static final int e=0x7f04000f;
-        public static final int e2=0x7f040010;
-        public static final int e3=0x7f040011;
-        public static final int f=0x7f040012;
-        public static final int f2=0x7f040013;
-        public static final int f3=0x7f040014;
-        public static final int fs=0x7f040015;
-        public static final int fs2=0x7f040016;
-        public static final int fs3=0x7f040017;
-        public static final int g=0x7f040018;
-        public static final int g2=0x7f040019;
-        public static final int g3=0x7f04001a;
-        public static final int gs=0x7f04001b;
-        public static final int gs2=0x7f04001c;
-        public static final int gs3=0x7f04001d;
+        public static final int n0=0x7f040000;
+        public static final int n1=0x7f040001;
+        public static final int n10=0x7f040002;
+        public static final int n11=0x7f040003;
+        public static final int n2=0x7f040004;
+        public static final int n3=0x7f040005;
+        public static final int n4=0x7f040006;
+        public static final int n5=0x7f040007;
+        public static final int n6=0x7f040008;
+        public static final int n7=0x7f040009;
+        public static final int n8=0x7f04000a;
+        public static final int n9=0x7f04000b;
     }
     public static final class string {
         public static final int app_name=0x7f070006;

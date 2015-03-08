@@ -50,7 +50,7 @@ public final class GraphicsController extends View
 		paint.setStyle(Style.FILL_AND_STROKE);
 		paint.setColor(Color.GRAY);
 		for(int i = 0; i<6; i++){
-			paint.setStrokeWidth(4+i);
+			paint.setStrokeWidth(10-i);
 			g.drawLine(0,touch.stringLocations[i],1920,touch.stringLocations[i], paint);
 		}
 		paint.setColor(Color.WHITE);

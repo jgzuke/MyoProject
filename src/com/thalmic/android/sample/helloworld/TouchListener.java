@@ -14,7 +14,8 @@ public class TouchListener implements OnTouchListener {
 	
 	static int[] baseKeys = {0,5,10,15,19,24};
 	static int[] stringLocations = {155,310,465,620,775,930};
-	static int[] fretLocations = {408,790,1230,1640,2000};
+	//static int[] fretLocations = {408,790,1230,1640,2000};
+	static int[] fretLocations = {1920-1640, 1920-1230, 1920-790, 1920-408, 2000};
 	int[] activeNodes = {0,0,0,0,0,0};
 	public TouchListener(){
 		Log.e("myid", "createdThing");
@@ -133,6 +134,41 @@ public class TouchListener implements OnTouchListener {
 		{
 			toplay[i] = activeNodes[i] + baseKeys[i];
 		}
+		//break it up to check for chord patterns
+		//check for major chords
+		boolean major = false;
+		for(int i = 0; i<6; i++)
+		{
+			//search each ones:
+			for (int j = 0; j < 6; j++) {
+				if ((toplay[i] - toplay[j]) == 4) {
+					for (int k = 0; k < 6; k++) {
+						if ((toplay[i] - toplay[k]) == 7) {
+							int [] newI = {i, j, k, -1, -1, -1};
+							return newI;
+						}
+						
+					}
+				}
+			}
+		}
+		//minor chords
+		for(int i = 0; i<6; i++)
+		{
+			//search each ones:
+			for (int j = 0; j < 6; j++) {
+				if ((toplay[i]%12 - toplay[j]%12) == 3) {
+					for (int k = 0; k < 6; k++) {
+						if ((toplay[i] - toplay[k]) == 7) {
+							int [] newI = {i, j, k, -1, -1, -1};
+							return newI;
+						}
+						
+					}
+				}
+			}
+		}
+		
 		return toplay;
 	}
 }
