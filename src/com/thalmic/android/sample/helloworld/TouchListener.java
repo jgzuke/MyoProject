@@ -33,7 +33,7 @@ public class TouchListener implements OnTouchListener {
 		return (int)y; //TODO
 	}
 	int[] coordinate = new int[2];
-	int ID;
+	int ID = 0;
 	@Override
     public boolean onTouch(View v, MotionEvent e)
 	{
@@ -50,10 +50,16 @@ public class TouchListener implements OnTouchListener {
 		        break;
 		        case MotionEvent.ACTION_POINTER_DOWN:
 		        	ID = e.getPointerId(e.getActionIndex());
-		        	coordinate[0] = placToCoordsX(e.getX(ID));
-		        	coordinate[1] = placToCoordsY(e.getY(ID));
-		        	fingers.add(coordinate.clone());
-		        	prevIDs.add(ID);
+		        	if(ID < e.getPointerCount())
+		        	{
+			        	coordinate[0] = placToCoordsX(e.getX(ID));
+			        	coordinate[1] = placToCoordsY(e.getY(ID));
+			        	if(fingers.size() < 9)
+			        	{
+			        		fingers.add(coordinate.clone());
+			        		prevIDs.add(ID);
+			        	}
+		        	}
 		        break;
 		        case MotionEvent.ACTION_MOVE:
 		        	for(int i = 0; i < fingers.size(); i++)

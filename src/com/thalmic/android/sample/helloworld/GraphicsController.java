@@ -4,6 +4,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 public final class GraphicsController extends View
 {
@@ -12,7 +17,17 @@ public final class GraphicsController extends View
 	public String packageName;
 	Bitmap back;
 	private TouchListener touch;
-	public GraphicsController(Context co)
+	private Paint paint;
+	private Handler mHandler = new Handler();
+	protected Runnable frameCaller = new Runnable()
+	{
+		public void run()
+		{
+			invalidate();
+			mHandler.postDelayed(this, 40);
+		}
+	};	
+	public GraphicsController(Context co, TouchListener t)
 	{
 		super(co);
 		opts = new BitmapFactory.Options();
@@ -23,15 +38,16 @@ public final class GraphicsController extends View
 		packageName = co.getPackageName();
 		res = co.getResources();
 		back = loadImage("guitar_frets", 1920, 1080);
-	}
-	public void setTouch(TouchListener t)
-	{
+		paint = new Paint();
 		touch = t;
+		frameCaller.run();
 	}
 	@Override
 	protected void onDraw(Canvas g)
 	{
         g.drawBitmap(back, 0, 0, null);
+		paint.setColor(Color.WHITE);
+		paint.setStyle(Style.FILL);
         for(int i = 0; i < 6; i++)
         {
             if(touch.activeNodes[i] != 0)
@@ -41,7 +57,8 @@ public final class GraphicsController extends View
                 {
                     l = touch.fretLocations[5-1-touch.activeNodes[i]];
                 }
-                g.drawLine(l,touch.stringLocations[i],touch.fretLocations[5-touch.activeNodes[i]],touch.stringLocations[i], null);
+                int k = touch.ID;
+                g.drawLine(l,touch.stringLocations[i],touch.fretLocations[5-touch.activeNodes[i]],touch.stringLocations[i], paint);
             }
         }
 

@@ -170,9 +170,8 @@ public class HelloWorldActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         detect = new TouchListener();
-        graphicsController = new GraphicsController(this);
+        graphicsController = new GraphicsController(this, detect);
 		graphicsController.setOnTouchListener(detect);
-		graphicsController.setTouch(detect);
 		setContentView(graphicsController);
 
 
