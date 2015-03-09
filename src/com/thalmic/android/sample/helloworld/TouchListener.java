@@ -18,7 +18,6 @@ public class TouchListener implements OnTouchListener {
 	static int[] fretLocations = {1920-1640, 1920-1230, 1920-790, 1920-408, 2000};
 	int[] activeNodes = {0,0,0,0,0,0};
 	public TouchListener(){
-		Log.e("myid", "createdThing");
 	}
 	protected void setDimensions(int width, int height)
 	{
@@ -88,7 +87,6 @@ public class TouchListener implements OnTouchListener {
 		int[] newNodes = {0,0,0,0,0,0};
 		for(int i = 0; i < fingers.size(); i++)
 		{
-			if(actionMask != MotionEvent.ACTION_MOVE) Log.e("myid", "C: ".concat(Integer.toString(fingers.get(i)[0])).concat(", ").concat(Integer.toString(fingers.get(i)[1])) );
 			int x = fingers.get(i)[0] - 62;
 	    	int y = fingers.get(i)[1];
 	    	int ax = 0;
@@ -140,11 +138,41 @@ public class TouchListener implements OnTouchListener {
 		for(int i = 0; i<6; i++)
 		{
 			//search each ones:
+			//check for G chord:
+			if (toplay[i] == 3) {
+				for (int j = 0; j < 6; j++) {
+					if (toplay[j] == 7) {
+						for (int k = 0; k < 6; k++) {
+							if (toplay[k] == 10) {
+								int[] newI = {3, 7, 10, 15, 19, 27};
+								return newI;
+							}
+						}
+					}
+				}
+			}
+			//c chord
+			else if (toplay[i] == 8) {
+				for (int j = 0; j < 6; j++) {
+					if (toplay[j] == 12) {
+						for (int k = 0; k < 15; k++) {
+							if (toplay[k] == 15) {
+								int[] newI = {8, 12, 15, 20, 24, -1};
+								return newI;
+							}
+						}
+					}
+				}
+			}
 			for (int j = 0; j < 6; j++) {
-				if ((toplay[i] - toplay[j]) == 4) {
+				if ((toplay[j] - toplay[i]) == 4) {
 					for (int k = 0; k < 6; k++) {
-						if ((toplay[i] - toplay[k]) == 7) {
-							int [] newI = {i, j, k, i+12, j+12, -1};
+						if ((toplay[k] - toplay[i]) == 7) {
+							if (toplay[i] == 0) {
+								return toplay;
+							}
+							int [] newI = {i, j, k, i+12,-1, -1};
+							//Log.e("myid", "minor chord");
 							return newI;
 						}
 						
@@ -157,10 +185,14 @@ public class TouchListener implements OnTouchListener {
 		{
 			//search each ones:
 			for (int j = 0; j < 6; j++) {
-				if ((toplay[i]%12 - toplay[j]%12) == 3) {
+				if ((toplay[j] - toplay[i]) == 3) {
 					for (int k = 0; k < 6; k++) {
-						if ((toplay[i] - toplay[k]) == 7) {
-							int [] newI = {i, j, k, i+12, j+12, -1};
+						if ((toplay[k] - toplay[i]) == 7) {
+							if (toplay[i] == 0) {
+								return toplay;
+							}
+							int [] newI = {i, j, k, i+12, -1, -1};
+							//Log.e("myid", "minor chord");
 							return newI;
 						}
 						

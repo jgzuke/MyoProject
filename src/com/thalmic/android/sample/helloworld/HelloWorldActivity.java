@@ -251,6 +251,7 @@ public class HelloWorldActivity extends Activity {
 		if (toPlay != -1) {
 			spool.play(soundPoolMap[toPlay%12], newV, newV, 1, 0, (float)Math.pow(2, toPlay/12));
 		}
+		Log.e("myid", ""+toPlay);
 	}
     @Override
     protected void onDestroy() {
