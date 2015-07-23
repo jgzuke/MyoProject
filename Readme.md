@@ -14,14 +14,14 @@ Myo Guitar is an Android app that connects to a Myo Armband via bluetooth, and s
 
 ###License:
 <code>An android Myo Guitar App
-Copyright (C) 2015  Jason Zukevitch, Samuel Wu, Sadman Kazi, Jack Wang & Jacky Han
+Copyright (C) 2015  Jason Zukevitch, Samuel Wu, Sadman Kazi, Jack Wang & Jacky Han. </code>
 
-This program is free software; you can redistribute it and/or modify
+<code>This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+(at your option) any later version.</code>
 
-This program is distributed in the hope that it will be useful,
+<code>This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.</code>
