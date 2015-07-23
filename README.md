@@ -6,7 +6,7 @@ Myo Guitar is an Android app that connects to a Myo Armband via bluetooth, and s
 [![UW EngHack W2015 Demo Video](http://img.youtube.com/vi/RQTbsyMXNVM/0.jpg)](https://www.youtube.com/watch?v=RQTbsyMXNVM)
 
 ###Contributors:
-* [Jason Zukevitch](https://github.com/jgzuke/)
+* [Jason Zukewich](https://github.com/jgzuke/)
 * [Samuel Wu](https://github.com/samuelwu1/)
 * [Sadman Kazi](https://github.com/sadmansk/)
 * [Jack Wang](https://github.com/jj22wang/)
